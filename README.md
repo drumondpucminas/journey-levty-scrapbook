@@ -64,7 +64,7 @@ O servidor será iniciado, e você deverá ver uma mensagem no console, por exem
 Servidor do Departamento de Polícia rodando em http://localhost:3000
 
 
-## Orientações Gerais para a atividade
+## 💡 Orientações Gerais para a atividade
 ### Controladores
 Nessa etapa vamos modularizar nosso código e utilizar os controladores para servir as rotas. Os dois arquivos de controladores devem receber os nomes indicados abaixo e devem residir na pasta `/controllers` 
 ### Rotas
@@ -99,7 +99,10 @@ app.listen(PORT, () => {
     console.log(`Servidor do Departamento de Polícia rodando em http://localhost:${PORT} em modo de desenvolvimento`);
 }); 
  ```
-
+### Teste da API 
+Recomendamos que você teste a sua API com as ferramentas *Postman* e *Insomnia*. Ambos simulam um cliente e mandam requisições para sua aplicação de maneira que testá-la se torne uma atividade mais visual e simples. Seguem links úteis para a instalação e utilização de ambos
+- Site oficial do Postman: https://www.postman.com/
+- Site oficial do Insomnia: https://insomnia.rest/
  
 ---
 # 📁  Estrutura dos Diretórios (pastas) 
@@ -132,18 +135,14 @@ Gerencia os **registros de crimes nos arquivos do departamento de polícia**.
 - `PUT /casos/:id` → Atualiza os dados de um caso por completo.
 - `PATCH /casos/:id` → Atualiza os dados de um caso parcialmente.
 - `DELETE /casos/:id` → Remove um caso do sistema.
-## Bônus
-- `GET /casos?agente_id=uuid` → Lista todos os casos atribuídos à um agente específico.
-- `GET /casos/:caso_id?agente_id=uuid` → Retorna os dados completos do agente responsável por um caso específico.
-- `GET /casos?status=aberto` → Lista todos os casos em aberto.
 
 
-#### Estrutura de um caso:
+### Estrutura de um caso:
   - `id`: string (UUID) **obrigatório**.
   - `titulo`: string **obrigatório**.
   - `descricao`: string **obrigatório**.
   - `status`: deve ser `"aberto"` ou `"solucionado"` **obrigatório**.
-  - `agente_id`: string (UUID), id do agente responsável
+  - `agente_id`: string (UUID), id do agente responsável **obrigatório**
 
 ### Regras e Validações:
 
@@ -153,7 +152,26 @@ Gerencia os **registros de crimes nos arquivos do departamento de polícia**.
 - Dados mal formatados devem retornar status **400**.
 - Status HTTP esperados: **201**, **200**, **204**, **400**, **404**.
 
----
+
+## Bônus 🌟
+
+### Endpoints
+- `GET /casos?agente_id=uuid` → Lista todos os casos atribuídos à um agente específico.
+- `GET /casos/:caso_id?agente_id=uuid` → Retorna os dados completos do agente responsável por um caso específico.
+- `GET /casos?status=aberto` → Lista todos os casos em aberto.
+
+### Corpo de Resposta de Erro (Response Body)
+Ganhe pontuação bônus por implementar um corpo de resposta personalizado para um payload com argumentos inválidos! O JSON abaixo exemplifica um corpo de resposta para uma requisição em que o campo `status` é inválido.
+```json
+{
+  "status": 400,
+  "message": "Parâmetros inválidos"
+  "errors": [
+    "status": "O campo 'status' pode ser somente 'aberto' ou 'solucionado' "
+  ]
+}
+
+```
 
 # 📙 Recurso de agentes policiais: `/agentes`
 
@@ -167,18 +185,6 @@ Gerencia os **agentes da polícia**.
 - `PUT /agentes/:id` → Atualiza os dados do agente por completo.
 - `PATCH /agentes/:id` → Atualiza os dados do agente parcialmente.
 - `DELETE /agentes/:id` → Remove o agente.
-
-## Bônus
-
-- `GET /agentes?cargo=inspetor` → Lista todos os agentes baseado no cargo ("inspetor" ou "delegado").
-- `GET /agentes?sort=dataDeIncorporacao` ou `sort=-dataDeIncorporacao` → Lista os agentes em ordem crescente ou decrescente de data incorporação 
-
-`sort=dataDeIncorporacao` → ordem crescente (mais antigo primeiro)
-
-`sort=-dataDeIncorporacao` → ordem decrescente (mais recente primeiro)
-
-
-
 
 
 #### Estrutura de um agente:
@@ -194,6 +200,28 @@ Gerencia os **agentes da polícia**.
 - IDs inexistentes devem retornar status **404**.
 - Status HTTP esperados: **201**, **200**, **204**, **400**, **404**.
 
+##  Bônus 🌟
+### Endpoints
+- `GET /agentes?cargo=inspetor` → Lista todos os agentes baseado no cargo ("inspetor" ou "delegado").
+- `GET /agentes?sort=dataDeIncorporacao` ou `sort=-dataDeIncorporacao` → Lista os agentes em ordem crescente ou decrescente de data incorporação 
+
+`sort=dataDeIncorporacao` → ordem crescente (mais antigo primeiro)
+
+`sort=-dataDeIncorporacao` → ordem decrescente (mais recente primeiro)
+
+### Corpo de Resposta de Erro (Response Body)
+Ganhe pontuação bônus por implementar um corpo de resposta personalizado para um payload com argumentos inválidos! O JSON abaixo exemplifica um corpo de resposta para uma requisição em que o campo `dataDeIncorporacao` não seguiu a formatação adequada.
+```json
+{
+  "status": 400,
+  "message": "Parâmetros inválidos"
+  "errors": [
+    "dataDeIncorporacao": "Campo dataDeIncorporacao deve seguir a formatação 'YYYY-MM-DD' "
+  ]
+}
+
+```
+
 
 ---
 # 📝 Orientações gerais para respostas
@@ -205,11 +233,13 @@ Gerencia os **agentes da polícia**.
 ### Requisições DELETE
 - As requisições do tipo `DELETE`devem retornar o status code **204 NO CONTENT✅** e não devem possuir corpo de resposta.
 
+---
+# 📃 Documentação da API com o Swagger e padrão OAS (OpenAPI Specification)
+- Você deve documentar a API que criou seguindo os padrões OAS e utilizando a ferramenta *Swagger*. Isso será feito dentro da própria aplicação com a ajuda das bibliotecas `swagger-jsdoc`e `swagger-ui-express`. **Sua documentação deve estar disponível no endpoint `/docs`** . 
+- Sua documentação deve seguir o padrão OAS, o qual o *Swagger* tem suporte nativo
+- Fique à vontade para escolher entre um documento de definição em formato **JSON** ou **YAML**.
+- Teremos um Hands-On sobre como utilizar a ferramenta.
 
-
-
-
-
-
-
+---
+### Desejamos êxito a todos nesta etapa e que todos tenham resultados à altura do desafio. 🎯
 
