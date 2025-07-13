@@ -170,9 +170,15 @@ Gerencia os **agentes da polícia**.
 
 ## Bônus
 
-- `GET /agentes?cargo=inspetore` → Lista todos os agentes de cargo "inspetor".
-- `GET /agentes?cargo=delegado` → Lista todos os agentes de cargo "delegado".
-- `GET /agentes/senioridade` → Lista os agentes em ordem decrescente de data incorporação, do mais velho para o mais novo
+- `GET /agentes?cargo=inspetor` → Lista todos os agentes baseado no cargo ("inspetor" ou "delegado").
+- `GET /agentes?sort=dataDeIncorporacao` ou `sort=-dataDeIncorporacao` → Lista os agentes em ordem crescente ou decrescente de data incorporação 
+
+`sort=dataDeIncorporacao` → ordem crescente (mais antigo primeiro)
+
+`sort=-dataDeIncorporacao` → ordem decrescente (mais recente primeiro)
+
+
+
 
 
 #### Estrutura de um agente:
