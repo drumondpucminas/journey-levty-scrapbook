@@ -2,7 +2,7 @@
 
 ## 🧩 Contexto
 
-A Polícia está modernizando seus sistemas e criou um novo serviço digital para rastrear **casos, denúncias e agentes da corporação**. 
+A Polícia está modernizando seus sistemas e criou um novo serviço digital para rastrear **casos e agentes da corporação**. 
 
 Você foi convocado para desenvolver a **primeira versão da API REST**, que permitirá aos investigadores cadastrar, consultar e atualizar informações — tudo operando em um servidor **Node.js com Express**.
 
@@ -10,7 +10,7 @@ Você foi convocado para desenvolver a **primeira versão da API REST**, que per
 
 ## 🎯 Objetivo
 
-Construir uma **API RESTful** que permita o gerenciamento de **agentes, denúncias e casos policiais fictícios**, com validações, tratamento de erros e dados armazenados **em memória** (utilizando arrays).
+Construir uma **API RESTful** que permita o gerenciamento de **agentes e casos policiais fictícios**, com validações, tratamento de erros e dados armazenados **em memória** (utilizando arrays).
 
 ---
 # 📁  Estrutura dos Diretórios (pastas) 
