@@ -14,7 +14,22 @@ Construir uma **API RESTful** que permita o gerenciamento de **agentes, denúnci
 
 ---
 # 📁  Estrutura dos Diretórios (pastas) 
+```
+📦 SEU-REPOSITÓRIO
+├── 📁 .github
+│   └── 📁 workflows
+│       └── classroom.yml         
+│
+├── 📁 controllers
+│   ├── agentesController.js      
+│   └── casosController.js        
 
+├── server.js                     
+├── README.md                     
+```
+- O Router do express e as rotas da API devem estar no `server.js`.
+- Os controladores devem estar na pasta `/controllers`
+- Não delete a pasta `.github, é por lá que o **Autograder** reside.
 ---
 # 📙 Recurso de casos policiais: `/casos`
 
