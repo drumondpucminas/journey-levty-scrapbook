@@ -2,7 +2,7 @@
 
 ## 🧩 Contexto
 
-A Polícia está modernizando seus sistemas e criou um novo serviço digital para rastrear **casos e agentes da corporação**. 
+A Polícia está modernizando seus sistemas e criou um novo serviço digital para rastrear **casos, denúncias e agentes da corporação**. 
 
 Você foi convocado para desenvolver a **primeira versão da API REST**, que permitirá aos investigadores cadastrar, consultar e atualizar informações — tudo operando em um servidor **Node.js com Express**.
 
@@ -10,8 +10,97 @@ Você foi convocado para desenvolver a **primeira versão da API REST**, que per
 
 ## 🎯 Objetivo
 
-Construir uma **API RESTful** que permita o gerenciamento de **agentes e casos policiais fictícios**, com validações, tratamento de erros e dados armazenados **em memória** (utilizando arrays).
+Construir uma **API RESTful** que permita o gerenciamento de **agentes, denúncias e casos policiais fictícios**, com validações, tratamento de erros e dados armazenados **em memória** (utilizando arrays).
 
+--- 
+
+## Como Iniciar o Servidor
+
+Siga os passos abaixo para configurar e rodar o projeto em sua máquina local.
+
+**1. Crie o projeto seguindo a estrutura**
+
+Clone o repositório e execute o seguinte comando: 
+
+```npm init -y```
+
+Depois, crie os repositórios e arquivos e diretórios seguindo a estrutura de exemplo (está descrita abaixo).
+
+**2. Instale as Dependências**
+
+Navegue até o diretório raiz do projeto pelo terminal e instale o Express.js:
+
+```bash
+npm install express
+```
+Se você estiver recebendo os dados do formulário via POST, precisará de um middleware para interpretar o corpo da requisição. O Express já inclui o express.urlencoded.
+
+**Observação:** não devem ser utilizadas outras dependências além do express, como template engines.
+
+**3. Crie o servidor**
+
+Insira este código no arquivo server.js
+
+```javascript
+const express = require('express')
+const app = express();
+const PORT = 3000;
+
+app.listen(PORT, () => {
+    console.log(`Servidor da DevBurger rodando em localhost:${PORT}`);
+});
+```
+
+**4. Inicie o Servidor**
+
+Execute o seguinte comando no terminal:
+
+```bash
+npm start
+```
+
+O servidor será iniciado, e você deverá ver uma mensagem no console, por exemplo:
+
+Servidor da DevBurger rodando em http://localhost:3000
+
+Agora, você pode abrir seu navegador e acessar http://localhost:3000. O texto "Hello World!" deverá ser exibido no seu navegador.
+## Orientações Gerais para a atividade
+### Controladores
+Nessa etapa vamos modularizar nosso código e utilizar os controladores para servir as rotas. Os dois arquivos de controladores devem receber os nomes indicados abaixo e devem residir na pasta `/controllers` 
+### Rotas
+As rotas nessa etapa devem ser definidas no arquivo `routes.js`, porém dessa vez utilizaremos o Router do express, segue um exemplo de como utilizá-lo um exemplo presente na documentação oficial do express abaixo:
+```javascript
+const express = require('express')
+const router = express.Router();
+const PORT = 3000;
+
+// define a rota base
+router.get('/', (req, res) => {
+  res.send('Birds home page')
+})
+// define a rota /about
+router.get('/about', (req, res) => {
+  res.send('About birds')
+})
+
+module.exports = router
+```
+Agora adicionaremos o `router` como middleware no arquivo principal da aplicação:
+
+```javascript
+//server.js 
+
+const express = require('express');
+const app = express();
+
+app.use(router);
+
+app.listen(PORT, () => {
+    console.log(`Servidor da DevBurger rodando em http://localhost:${PORT} em modo de desenvolvimento`);
+}); 
+ ```
+
+ 
 ---
 # 📁  Estrutura dos Diretórios (pastas) 
 ```
@@ -24,10 +113,11 @@ Construir uma **API RESTful** que permita o gerenciamento de **agentes e casos p
 │   ├── agentesController.js      
 │   └── casosController.js        
 
-├── server.js                     
+├── server.js
+├── routes.js                     
 ├── README.md                     
 ```
-- O Router do express e as rotas da API devem estar no `server.js`.
+- O Router do express e as rotas da API devem estar no `routes.js`.
 - Os controladores devem estar na pasta `/controllers`
 - Não delete a pasta `.github, é por lá que o **Autograder** reside.
 ---
