@@ -13,13 +13,15 @@ Você foi convocado para desenvolver a **primeira versão da API REST**, que per
 Construir uma **API RESTful** que permita o gerenciamento de **agentes, denúncias e casos policiais fictícios**, com validações, tratamento de erros e dados armazenados **em memória** (utilizando arrays).
 
 ---
+# 📁  Estrutura dos Diretórios (pastas) 
 
-#  Recurso de casos policiais: `/casos`
+---
+# 📙 Recurso de casos policiais: `/casos`
 
 Gerencia os **registros de crimes nos arquivos do departamento de polícia**.
 
 ### Métodos HTTP que deverão ser implementados:
-- `GET /casos` → Lista todos os casos registrados.
+- `GET /casos` → Lista todos os casos registrados. 
 - `GET /casos/:id` → Retorna os detalhes de um caso específico.
 - `POST /casos` → Cria um novo caso com os seguintes campos:
 - `PUT /casos/:id` → Atualiza os dados de um caso por completo.
@@ -29,6 +31,7 @@ Gerencia os **registros de crimes nos arquivos do departamento de polícia**.
 - `GET /casos?agente_id=uuid` → Lista todos os casos atribuídos à um agente específico.
 - `GET /casos/:caso_id?agente_id=uuid` → Retorna os dados completos do agente responsável por um caso específico.
 - `GET /casos?status=aberto` → Lista todos os casos em aberto.
+
 
 #### Estrutura de um caso:
   - `id`: string (UUID) **obrigatório**.
@@ -47,7 +50,7 @@ Gerencia os **registros de crimes nos arquivos do departamento de polícia**.
 
 ---
 
-#  Recurso de agentes policiais: `/agentes`
+# 📙 Recurso de agentes policiais: `/agentes`
 
 Gerencia os **agentes da polícia**.
 
@@ -62,15 +65,16 @@ Gerencia os **agentes da polícia**.
 
 ## Bônus
 
-- `GET /agentes/inspetores` → Lista todos os agentes de cargo "Inspetor".
-- `GET /agentes/delegados` → Lista todos os agentes de cargo "Delegado".
+- `GET /agentes/inspetores` → Lista todos os agentes de cargo "inspetor".
+- `GET /agentes/delegados` → Lista todos os agentes de cargo "delegado".
+- `GET /agentes/senioridade` → Lista os agentes em ordem decrescente de data incorporação, do mais velho para o mais novo
 
 
 #### Estrutura de um agente:
   - `id`: string (UUID) **obrigatório**.
   - `nome`: string **obrigatório**.
-  - `anoDeEntrada`: string , no formato `YYYY-MM-DD`**obrigatória**.
-  - `cargo`: ("Inspetor", "Delegado", etc.) **obrigatório**.
+  - `dataDeIncorporacao`: string , no formato `YYYY-MM-DD`**obrigatória**.
+  - `cargo`: ("inspetor", "delegado", etc.) **obrigatório**.
 
 ### Regras e Validações:
 
@@ -81,6 +85,18 @@ Gerencia os **agentes da polícia**.
 
 
 ---
+# 📝 Orientações gerais para respostas
+### Requisições GET
+- As requisições do tipo `GET` devem retornar o status code **200 OK✅** e o objeto ou array de objetos do recurso.
+### Requisições POST, PUT e PATCH
+- As requisições do tipo `PUT` e `PATCH` devem retornar o status code **200 OK✅** e o objeto atualizado!
+- As requisições do tipo `POST` devem retornar o status code **201 CREATED✅** e o objeto criado!
+### Requisições DELETE
+- As requisições do tipo `DELETE`devem retornar o status code **204 NO CONTENT✅** e não devem possuir corpo de resposta.
+
+
+
+
 
 
 
