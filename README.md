@@ -2,7 +2,7 @@
 
 ## 🧩 Contexto
 
-A Polícia está modernizando seus sistemas e criou um novo serviço digital para rastrear **casos, e agentes da corporação**. 
+A Polícia está modernizando seus sistemas e criou um novo serviço digital para rastrear **casos e agentes da corporação**. 
 
 Você foi convocado para desenvolver a **primeira versão da API REST**, que permitirá aos investigadores cadastrar, consultar e atualizar informações — tudo operando em um servidor **Node.js com Express**.
 
@@ -10,7 +10,7 @@ Você foi convocado para desenvolver a **primeira versão da API REST**, que per
 
 ## 🎯 Objetivo
 
-Construir uma **API RESTful** que permita o gerenciamento de **agentes,e casos policiais fictícios**, com validações, tratamento de erros e dados armazenados **em memória** (utilizando arrays).
+Construir uma **API RESTful** que permita o gerenciamento de **agentes e casos policiais fictícios**, com validações, tratamento de erros e dados armazenados **em memória** (utilizando arrays).
 
 --- 
 
@@ -35,7 +35,7 @@ npm install express
 ```
 Se você estiver recebendo os dados do formulário via POST, precisará de um middleware para interpretar o corpo da requisição. O Express já inclui o express.urlencoded.
 
-**Observação:** não devem ser utilizadas outras dependências além do express, como template engines.
+**Observação:** não devem ser utilizadas outras dependências além do express.
 
 **3. Crie o servidor**
 
@@ -47,7 +47,7 @@ const app = express();
 const PORT = 3000;
 
 app.listen(PORT, () => {
-    console.log(`Servidor da DevBurger rodando em localhost:${PORT}`);
+    console.log(`Servidor do Departamento de Polícia rodando em localhost:${PORT}`);
 });
 ```
 
@@ -61,9 +61,9 @@ npm start
 
 O servidor será iniciado, e você deverá ver uma mensagem no console, por exemplo:
 
-Servidor da DevBurger rodando em http://localhost:3000
+Servidor do Departamento de Polícia rodando em http://localhost:3000
 
-Agora, você pode abrir seu navegador e acessar http://localhost:3000. O texto "Hello World!" deverá ser exibido no seu navegador.
+
 ## Orientações Gerais para a atividade
 ### Controladores
 Nessa etapa vamos modularizar nosso código e utilizar os controladores para servir as rotas. Os dois arquivos de controladores devem receber os nomes indicados abaixo e devem residir na pasta `/controllers` 
@@ -96,7 +96,7 @@ const app = express();
 app.use(router);
 
 app.listen(PORT, () => {
-    console.log(`Servidor da DevBurger rodando em http://localhost:${PORT} em modo de desenvolvimento`);
+    console.log(`Servidor do Departamento de Polícia rodando em http://localhost:${PORT} em modo de desenvolvimento`);
 }); 
  ```
 
@@ -170,8 +170,8 @@ Gerencia os **agentes da polícia**.
 
 ## Bônus
 
-- `GET /agentes/inspetores` → Lista todos os agentes de cargo "inspetor".
-- `GET /agentes/delegados` → Lista todos os agentes de cargo "delegado".
+- `GET /agentes?cargo=inspetore` → Lista todos os agentes de cargo "inspetor".
+- `GET /agentes?cargo=delegado` → Lista todos os agentes de cargo "delegado".
 - `GET /agentes/senioridade` → Lista os agentes em ordem decrescente de data incorporação, do mais velho para o mais novo
 
 
