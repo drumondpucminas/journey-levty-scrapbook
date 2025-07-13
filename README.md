@@ -33,9 +33,8 @@ Navegue até o diretório raiz do projeto pelo terminal e instale o Express.js:
 ```bash
 npm install express
 ```
-Se você estiver recebendo os dados do formulário via POST, precisará de um middleware para interpretar o corpo da requisição. O Express já inclui o express.urlencoded.
 
-**Observação:** não devem ser utilizadas outras dependências além do express, como template engines.
+**Atenção!!!:** não devem ser utilizadas outras dependências além do express, como template engines.
 
 **3. Crie o servidor**
 
@@ -47,7 +46,7 @@ const app = express();
 const PORT = 3000;
 
 app.listen(PORT, () => {
-    console.log(`Servidor da DevBurger rodando em localhost:${PORT}`);
+    console.log(`Servidor do Departamento de Polícia rodando em localhost:${PORT}`);
 });
 ```
 
@@ -59,11 +58,8 @@ Execute o seguinte comando no terminal:
 npm start
 ```
 
-O servidor será iniciado, e você deverá ver uma mensagem no console, por exemplo:
+O servidor será iniciado, e você deverá ver uma mensagem no console, por exemplo: "Servidor do Departamento de Polícia rodando em http://localhost:3000"
 
-Servidor da DevBurger rodando em http://localhost:3000
-
-Agora, você pode abrir seu navegador e acessar http://localhost:3000. O texto "Hello World!" deverá ser exibido no seu navegador.
 ## Orientações Gerais para a atividade
 ### Controladores
 Nessa etapa vamos modularizar nosso código e utilizar os controladores para servir as rotas. Os dois arquivos de controladores devem receber os nomes indicados abaixo e devem residir na pasta `/controllers` 
