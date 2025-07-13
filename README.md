@@ -27,7 +27,7 @@ Gerencia os **registros de crimes nos arquivos do departamento de polícia**.
 - `DELETE /casos/:id` → Remove um caso do sistema.
 ## Bônus
 - `GET /casos?agente_id=uuid` → Lista todos os casos atribuídos à um agente específico.
-- `GET /casos/:id?agente_id=uuid` → Retorna o id do agente responsável por um caso específico.
+- `GET /casos/:caso_id?agente_id=uuid` → Retorna o id do agente responsável por um caso específico.
 - `GET /casos?status=aberto` → Lista todos os casos em aberto.
 
 #### Estrutura de um caso:
