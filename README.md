@@ -66,39 +66,49 @@ Servidor do Departamento de Polícia rodando em http://localhost:3000
 
 ## 💡 Orientações Gerais para a atividade
 ### Controladores
-Nessa etapa vamos modularizar nosso código e utilizar os controladores para servir as rotas. Os dois arquivos de controladores devem receber os nomes indicados abaixo e devem residir na pasta `/controllers` 
+Nessa etapa vamos modularizar nosso código e utilizar os controladores para servir as rotas. Os dois arquivos de controladores devem receber os nomes `agentesController.js` e `casosController.js` e devem residir na pasta `/controllers` 
 ### Rotas
-As rotas nessa etapa devem ser definidas no arquivo `routes.js`, porém dessa vez utilizaremos o Router do express, segue um exemplo de como utilizá-lo um exemplo presente na documentação oficial do express abaixo:
+As rotas nessa etapa devem ser definidas nos arquivos `agentesRoutes.js` e `casosRoutes.js` que por sua vez deve estar dentro da pasta `/routes`, porém dessa vez utilizaremos o Router do express, segue um exemplo de como utilizá-lo para definir uma rota GET no `agentesRoutes.js`:
 ```javascript
 const express = require('express')
 const router = express.Router();
-const PORT = 3000;
+const agentesController = require('../controllers/agentesController');
 
-// define a rota base
-router.get('/', (req, res) => {
-  res.send('Birds home page')
-})
-// define a rota /about
-router.get('/about', (req, res) => {
-  res.send('About birds')
-})
+// define a rota para /agentes usando o método GET
+router.get('/agentes', agentesController.seuMetodo)
 
 module.exports = router
 ```
-Agora adicionaremos o `router` como middleware no arquivo principal da aplicação:
+Agora adicionaremos o `agentesRouter` como middleware no arquivo principal da aplicação:
 
 ```javascript
 //server.js 
 
 const express = require('express');
 const app = express();
+const agentesRouter = require("./routes/agentesRouter")
 
-app.use(router);
+app.use(agentesRouter);
 
 app.listen(PORT, () => {
     console.log(`Servidor do Departamento de Polícia rodando em http://localhost:${PORT} em modo de desenvolvimento`);
 }); 
  ```
+ Pronto! Agora é só implementar as demais rotas da sua aplicação!
+## Models
+Os models no Express.js são onde definimos o schema do nosso banco de dados. Nesta etapa você deve somente criar uma classe para os recursos de **agente** e de **caso** que contenham os atributos especificados mais abaixo no enunciado.Crie os dois arquivos dentro de uma pasta `models`.
+
+## Repositories
+Os repositories são a nossa camada de *Data-Acess* e devem estar em uma pasta chamada `/repositories`. Serão nesses arquivos que você deverá definir o *array* para cada recurso para simularmos a persistência de dados nessa etapa. Os arquivos `casosRepository.js`e `agentesRepository.js`devem ser responsáveis **apenas** por manipular os dados do array, adicionando, removendo, buscando e atualizando objetos.
+## Services
+Adicionar uma camada de serviço à nossa API ajuda ainda mais a isolar responsabilidades e modularizar nossa aplicação. Nessa camada você deve inserir sua lógica de negócio. Nela você utiliza os métodos que você definiu no seu `repository`
+
+A arquitetura da sua aplicação deve seguir o seguinte fluxo:
+
+**controller** --> **service** --> **repository**
+## Utils (opcional)
+Nessa pasta você pode inserir funções para tratamento de erros, é
+
 ### Teste da API 
 Recomendamos que você teste a sua API com as ferramentas *Postman* e *Insomnia*. Ambos simulam um cliente e mandam requisições para sua aplicação de maneira que testá-la se torne uma atividade mais visual e simples. Seguem links úteis para a instalação e utilização de ambos
 - Site oficial do Postman: https://www.postman.com/
@@ -108,20 +118,38 @@ Recomendamos que você teste a sua API com as ferramentas *Postman* e *Insomnia*
 # 📁  Estrutura dos Diretórios (pastas) 
 ```
 📦 SEU-REPOSITÓRIO
-├── 📁 .github
-│   └── 📁 workflows
-│       └── classroom.yml         
 │
-├── 📁 controllers
-│   ├── agentesController.js      
-│   └── casosController.js        
-
+├── package.json
 ├── server.js
-├── routes.js                     
-├── README.md                     
+├── .env (opcional para centralizar configurações)
+│
+├── routes/
+│ ├── agentesRoutes.js
+│ └── casosRoutes.js
+│
+├── controllers/
+│ ├── agentesController.js
+│ └── casosController.js
+│
+├── services/
+│ ├── agentesService.js
+│ └── casosService.js
+│
+├── repositories/
+│ ├── agentesRepository.js
+│ └── casosRepository.js
+│
+├── models/
+│ ├── agente.js
+│ └── caso.js
+│
+├── docs/
+│ └── swagger.js
+│
+└── utils/
+└── errorHandler.js                 
+  
 ```
-- O Router do express e as rotas da API devem estar no `routes.js`.
-- Os controladores devem estar na pasta `/controllers`
 - Não delete a pasta `.github, é por lá que o **Autograder** reside.
 ---
 # 📙 Recurso de casos policiais: `/casos`
@@ -242,4 +270,3 @@ Ganhe pontuação bônus por implementar um corpo de resposta personalizado para
 
 ---
 ### Desejamos êxito a todos nesta etapa e que todos tenham resultados à altura do desafio. 🎯
-
