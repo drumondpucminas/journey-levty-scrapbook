@@ -67,6 +67,19 @@ Servidor do Departamento de Polícia rodando em http://localhost:3000
 ## 💡 Orientações Gerais para a atividade
 ### Controladores
 Nessa etapa vamos modularizar nosso código e utilizar os controladores para servir as rotas. Os dois arquivos de controladores devem receber os nomes `agentesController.js` e `casosController.js` e devem residir na pasta `/controllers` 
+Um exemplo de como um controller deve se parecer:
+```javascript
+const casosRepository = require("../repositories/casosRepository")
+function getAllCasos(req, res) {
+
+        const casos = casosRepository.findAll()
+        res.json(casos)
+}
+
+module.exports = {
+   getAllCasos
+}
+```
 ### Rotas
 As rotas nessa etapa devem ser definidas nos arquivos `agentesRoutes.js` e `casosRoutes.js` que por sua vez deve estar dentro da pasta `/routes`, porém dessa vez utilizaremos o Router do express, segue um exemplo de como utilizá-lo para definir uma rota GET no `agentesRoutes.js`:
 ```javascript
@@ -99,6 +112,29 @@ app.listen(PORT, () => {
 
 ## Repositories
 Os repositories são a nossa camada de *Data-Acess* e devem estar em uma pasta chamada `/repositories`. Serão nesses arquivos que você deverá definir o *array* para cada recurso para simularmos a persistência de dados nessa etapa. Os arquivos `casosRepository.js`e `agentesRepository.js`devem ser responsáveis **apenas** por manipular os dados do array, adicionando, removendo, buscando e atualizando objetos.
+Um exemplo de como um repository deve se parecer:
+```javascript
+const casos = [
+    {
+        id: "f5fb2ad5-22a8-4cb4-90f2-8733517a0d46",
+        titulo: "homicidio",
+        descricao: "Disparos foram reportados às 22:33 do dia 10/07/2007 na região do bairro União, resultando na morte da vítima, um homem de 45 anos.",
+        status: "aberto",
+        agente_id: "401bccf5-cf9e-489d-8412-446cd169a0f1" 
+    
+    },
+    //Demais objetos
+]
+
+function findAll() {
+    return casos
+}
+module.exports = {
+    findAll
+}
+
+```
+
 
 
 **route** --> **controller** --> **repository**
@@ -170,7 +206,7 @@ Gerencia os **registros de crimes nos arquivos do departamento de polícia**.
     id: "f5fb2ad5-22a8-4cb4-90f2-8733517a0d46",
     titulo: "homicidio",
     descricao: "Disparos foram reportados às 22:33 do dia 10/07/2007 na região do bairro União, resultando na morte da vítima, um homem de 45 anos.",
-    status: "aberto"
+    status: "aberto",
     agente_id: "401bccf5-cf9e-489d-8412-446cd169a0f1" 
 
 }
