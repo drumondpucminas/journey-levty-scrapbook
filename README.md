@@ -95,19 +95,16 @@ app.listen(PORT, () => {
 }); 
  ```
  Pronto! Agora é só implementar as demais rotas da sua aplicação!
-## Models
-Os models no Express.js são onde definimos o schema do nosso banco de dados. Nesta etapa você deve somente criar uma classe para os recursos de **agente** e de **caso** que contenham os atributos especificados mais abaixo no enunciado.Crie os dois arquivos dentro de uma pasta `models`.
+
 
 ## Repositories
 Os repositories são a nossa camada de *Data-Acess* e devem estar em uma pasta chamada `/repositories`. Serão nesses arquivos que você deverá definir o *array* para cada recurso para simularmos a persistência de dados nessa etapa. Os arquivos `casosRepository.js`e `agentesRepository.js`devem ser responsáveis **apenas** por manipular os dados do array, adicionando, removendo, buscando e atualizando objetos.
-## Services
-Adicionar uma camada de serviço à nossa API ajuda ainda mais a isolar responsabilidades e modularizar nossa aplicação. Nessa camada você deve inserir sua lógica de negócio. Nela você utiliza os métodos que você definiu no seu `repository`
 
-A arquitetura da sua aplicação deve seguir o seguinte fluxo:
 
-**controller** --> **service** --> **repository**
+**route** --> **controller** --> **repository**
+
 ## Utils (opcional)
-Nessa pasta você pode inserir funções para tratamento de erros, é
+Nessa pasta você pode inserir funções para tratamento de erros e demais utilidades que você preferir
 
 ### Teste da API 
 Recomendamos que você teste a sua API com as ferramentas *Postman* e *Insomnia*. Ambos simulam um cliente e mandam requisições para sua aplicação de maneira que testá-la se torne uma atividade mais visual e simples. Seguem links úteis para a instalação e utilização de ambos
@@ -131,23 +128,18 @@ Recomendamos que você teste a sua API com as ferramentas *Postman* e *Insomnia*
 │ ├── agentesController.js
 │ └── casosController.js
 │
-├── services/
-│ ├── agentesService.js
-│ └── casosService.js
-│
 ├── repositories/
 │ ├── agentesRepository.js
 │ └── casosRepository.js
 │
-├── models/
-│ ├── agente.js
-│ └── caso.js
 │
 ├── docs/
 │ └── swagger.js
 │
-└── utils/
-└── errorHandler.js                 
+├── utils/
+│ └── errorHandler.js
+│
+
   
 ```
 - Não delete a pasta `.github, é por lá que o **Autograder** reside.
@@ -172,9 +164,21 @@ Gerencia os **registros de crimes nos arquivos do departamento de polícia**.
   - `status`: deve ser `"aberto"` ou `"solucionado"` **obrigatório**.
   - `agente_id`: string (UUID), id do agente responsável **obrigatório**
 
+```json
+[
+{
+    id: "f5fb2ad5-22a8-4cb4-90f2-8733517a0d46",
+    titulo: "homicidio",
+    descricao: "Disparos foram reportados às 22:33 do dia 10/07/2007 na região do bairro União, resultando na morte da vítima, um homem de 45 anos.",
+    status: "aberto"
+    agente_id: "401bccf5-cf9e-489d-8412-446cd169a0f1" 
+
+}
+]
+```
+
 ### Regras e Validações:
 
-- `titulo` e `descricao` são obrigatórios.
 - `status` deve ser `"aberto"` ou `"solucionado"`.
 - IDs inexistentes devem retornar status **404**.
 - Dados mal formatados devem retornar status **400**.
@@ -187,6 +191,8 @@ Gerencia os **registros de crimes nos arquivos do departamento de polícia**.
 - `GET /casos?agente_id=uuid` → Lista todos os casos atribuídos à um agente específico.
 - `GET /casos/:caso_id?agente_id=uuid` → Retorna os dados completos do agente responsável por um caso específico.
 - `GET /casos?status=aberto` → Lista todos os casos em aberto.
+ - `GET /casos/search?q=homicídio` → Deve retornar todos os casos em que a palavra da query string aparece no **titulo** e/ou **descricao**, ou seja, uma pesquisa full-text
+
 
 ### Corpo de Resposta de Erro (Response Body)
 Ganhe pontuação bônus por implementar um corpo de resposta personalizado para um payload com argumentos inválidos! O JSON abaixo exemplifica um corpo de resposta para uma requisição em que o campo `status` é inválido.
@@ -220,6 +226,18 @@ Gerencia os **agentes da polícia**.
   - `nome`: string **obrigatório**.
   - `dataDeIncorporacao`: string , no formato `YYYY-MM-DD`**obrigatória**.
   - `cargo`: ("inspetor", "delegado", etc.) **obrigatório**.
+
+  ```json
+[
+{
+    id: "401bccf5-cf9e-489d-8412-446cd169a0f1",
+    nome: "Rommel Carneiro",
+    dataDeIncorporacao: "1992/10/04",
+    cargo: "delegado"
+
+}
+]
+```
 
 ### Regras e Validações:
 
